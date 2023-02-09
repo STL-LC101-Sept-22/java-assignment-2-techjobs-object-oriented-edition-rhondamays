@@ -22,7 +22,7 @@ public class JobTest {
     @Test
     public void testJobConstructorSetsAllFields() {
         String spec = "the constructor sets the class and the value of each field";
-        Job testJob= new Job("Product tester", new Employer("ACME"), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
+        Job testJob = new Job("Product tester", new Employer("ACME"), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
 
         assertTrue(testJob.getName() instanceof String);
         assertTrue(testJob.getEmployer() instanceof Employer);
@@ -45,6 +45,52 @@ public class JobTest {
         Job testJob1 = new Job();
         Job testJob2 = new Job();
         assertFalse(testJob1.equals(testJob2));
+    }
+
+    @Test
+    public void testToStringStartsAndEndsWithNewLine(){
+        String spec = "when passed Job object, returned string should begin and end with new line character";
+        Job testJob = new Job("Product tester", new Employer("ACME"), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
+
+        assertEquals(testJob.toString().charAt(0), '\n');
+        assertEquals(testJob.toString().charAt(testJob.toString().length() - 1), '\n');
+    }
+
+    @Test
+    public void testToStringContainsCorrectLabelsAndData() {
+        String spec = "test toString() to ensure it contains correct labels and data";
+        Job testJob = new Job("Product tester", new Employer("ACME"), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
+
+        String expected = '\n' +
+                "ID: " + testJob.getId() +
+                "\nName: " + testJob.getName() +
+                "\nEmployer: " + testJob.getEmployer() +
+                "\nLocation: " + testJob.getLocation() +
+                "\nPosition Type: " + testJob.getPositionType() +
+                "\nCore Competency: " + testJob.getCoreCompetency() + '\n';
+
+        String actual = testJob.toString() ;
+        assertEquals(expected, actual);
+
+    }
+
+    @Test
+    public void testToStringHandlesEmptyField() {
+        String spec = "toString() should return 'Data not available' if field is empty";
+
+        Job testJob = new Job("Product tester", new Employer(""), new Location("Desert"), new PositionType(""), new CoreCompetency("Persistence"));
+
+        String expected = '\n' +
+                "ID: " + testJob.getId() +
+                "\nName: " + testJob.getName() +
+                "\nEmployer: " + "Data not available" +
+                "\nLocation: " + testJob.getLocation() +
+                "\nPosition Type: " + "Data not available" +
+                "\nCore Competency: " + testJob.getCoreCompetency() + '\n';
+
+        String actual = testJob.toString();
+        assertEquals(expected, actual);
+
     }
 
 }

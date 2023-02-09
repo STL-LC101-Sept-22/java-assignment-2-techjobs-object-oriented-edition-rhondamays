@@ -43,6 +43,39 @@ public class Job {
         return id == job.id;
     }
 
+
+    @Override
+    public String toString() {
+        if (getName() == "") {
+            setName("Data not available");
+        }
+
+        if (getEmployer().getValue() == "") {
+            employer.setValue("Data not available");
+        }
+
+        if (getLocation().getValue() == "") {
+            location.setValue("Data not available");
+        }
+
+        if (getPositionType().getValue() == "") {
+            positionType.setValue("Data not available");
+        }
+
+        if (getCoreCompetency().getValue() == "") {
+            coreCompetency.setValue("Data not available");
+        }
+
+        return "\n" +
+                "ID: " + getId() +
+                "\nName: " + getName() +
+                "\nEmployer: " + getEmployer() +
+                "\nLocation: " + getLocation() +
+                "\nPosition Type: " + getPositionType() +
+                "\nCore Competency: " + getCoreCompetency() + '\n';
+    }
+
+
     @Override
     public int hashCode() {
         return Objects.hash(id);
@@ -96,4 +129,5 @@ public class Job {
     public void setCoreCompetency(CoreCompetency coreCompetency) {
         this.coreCompetency = coreCompetency;
     }
+
 }
